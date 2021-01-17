@@ -21,6 +21,9 @@ AEnemyAI::AEnemyAI()
 	//tells the ai to turn the direction that it is walking in
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 600.0f, 0.0f);
+
+	//enemyHp
+	EnemyHP = 1.0f;
 }
 
 // Called when the game starts or when spawned
@@ -44,3 +47,7 @@ void AEnemyAI::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
+void AEnemyAI::TakeDamage(float _damage)
+{
+	EnemyHP -= _damage;
+}

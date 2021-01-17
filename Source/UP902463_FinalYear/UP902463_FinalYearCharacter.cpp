@@ -46,6 +46,27 @@ AUP902463_FinalYearCharacter::AUP902463_FinalYearCharacter()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
+
+
+		//the player's max HP
+	PlayerHP = 1.00f;
+
+	//abilities
+	usedAbility1 = false;
+	abilityDuration = 1.0f;
+	abilityCDTime = 5.0f;
+
+	//attack
+	hasPunched = false;
+
+	//player stats
+	currentLevel = 1;
+	experiencePoints = 0.0f;
+	experienceToLevel = 1000.0f;
+
+	StrengthStat = 1;
+	DefenseStat = 1;
+
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -100,7 +121,11 @@ void AUP902463_FinalYearCharacter::SetupPlayerInputComponent(class UInputCompone
 	PlayerInputComponent->BindAction("Heal", IE_Pressed, this, &AUP902463_FinalYearCharacter::StartHeal);
 	PlayerInputComponent->BindAction("Damage", IE_Pressed, this, &AUP902463_FinalYearCharacter::StartDamage);
 
+	//use abilites
 	PlayerInputComponent->BindAction("ActivateAbility1", IE_Pressed, this, &AUP902463_FinalYearCharacter::UseAbility1);
+
+	//attacking
+	PlayerInputComponent->BindAction("Punch", IE_Pressed, this, &AUP902463_FinalYearCharacter::Punch);
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &AUP902463_FinalYearCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AUP902463_FinalYearCharacter::MoveRight);
@@ -120,19 +145,7 @@ void AUP902463_FinalYearCharacter::SetupPlayerInputComponent(class UInputCompone
 	// VR headset functionality
 	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &AUP902463_FinalYearCharacter::OnResetVR);
 
-	//the player's max HP
-	PlayerHP = 1.00f;
-
-	usedAbility1 = false;
-	abilityDuration = 1.0f;
-	abilityCDTime = 5.0f;
-
-	currentLevel = 1;
-	experiencePoints = 0.0f;
-	experienceToLevel = 1000.0f;
-
-	StrengthStat = 1;
-	DefenseStat = 1;
+	
 }
 
 
@@ -152,6 +165,12 @@ void AUP902463_FinalYearCharacter::TouchStopped(ETouchIndex::Type FingerIndex, F
 }
 
 #pragma region Player take damage and heal
+void AUP902463_FinalYearCharacter::Punch()
+{
+	hasPunched = true;
+}
+
+
 void AUP902463_FinalYearCharacter::StartDamage()
 {
 	TakeDamage(0.02f);

@@ -35,7 +35,7 @@ public:
 		float AISightMemorylength = 5.0f; //how long the AI rembers the detected object
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = AI)
-		float AILoseSightRadius = AISightRadius + 50.0f;
+		float AILoseSightRadius = AISightRadius + 50.0f; //how far the player has to be to lose sight.
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = AI)
 		float AIFieldofView = 90.0f; //field of view, how far the Ai can see

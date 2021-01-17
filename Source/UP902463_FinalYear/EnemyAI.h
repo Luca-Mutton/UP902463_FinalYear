@@ -18,9 +18,17 @@ public:
 	UPROPERTY(EditAnywhere, BluePrintReadWrite)
 		class APathPoints* NextPathPoint;
 
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	
+	UFUNCTION(BlueprintCallable)
+		void TakeDamage(float _damage);
+
+	//the current health of enemy
+	UPROPERTY(EditAnywhere, BluePrintReadWrite, Category = Enemy)
+		float EnemyHP;
 
 public:	
 	// Called every frame

@@ -29,6 +29,17 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseLookUpRate;
 
+#pragma region Attacks and actions
+	//allows character to punch
+	void Punch();
+
+	//determines if the character is currently zoomed in to their weapon
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Attack")
+		bool hasPunched;
+
+
+#pragma endregion
+
 #pragma region Health: Functions and values
 	//HP_System variables
 	void StartDamage();
